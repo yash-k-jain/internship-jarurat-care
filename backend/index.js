@@ -2,11 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config({ path: './config.env' })
 
-// Connecting DB
+//Bringing Connecting DB function
 const connectToMongo = require('./db')
 
 const app = express();
+//DB connection making
 connectToMongo()
+
 const port = process.env.PORT
 
 // JSON parser
