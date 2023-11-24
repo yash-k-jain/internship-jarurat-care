@@ -8,7 +8,7 @@ const fetchUser = (req, res, next) => {
     }
     try {
         // Verifying jwt token
-        const data = jwt.verify(authToken, process.env.JWT_KEY)
+        const data = jwt.verify(authToken, "itisasecretkey")
         req.user = data.user
         next()
     } catch (error) {
