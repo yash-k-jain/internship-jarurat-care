@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require('cors')
 require("dotenv").config({ path: "./config.env" });
 const PORT = 5000
 
@@ -9,6 +10,9 @@ const connectToMongo = require("./db");
 const app = express();
 //DB connection making
 connectToMongo();
+
+// using cors middleware
+app.use(cors())
 
 // const port = process.env.PORT;
 const port = PORT;

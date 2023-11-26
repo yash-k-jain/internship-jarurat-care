@@ -47,7 +47,7 @@ router.post(
           id: newUser.id,
         },
       };
-      const authToken = jwt.sign(data, process.env.JWT_KEY);
+      const authToken = jwt.sign(data, "itisasecretkey");
 
       return res.json({
         authToken: authToken,
@@ -102,12 +102,12 @@ router.post(
           id: user.id,
         },
       };
-      const authToken = jwt.sign(data, process.env.JWT_KEY);
+      const authToken = jwt.sign(data, "itisasecretkey");
       return res.json({
         authToken: authToken,
       });
     } catch (error) {
-      return res.status(500).json("Internal Error Occured");
+      return res.status(500).json({error : "Internal Error Occured"});
     }
   }
 );

@@ -18,7 +18,7 @@ router.get("/allNotes", fetchUser, async (req, res) => {
 // @route GET /api/auth/addNotes
 // @desc add all the notes of a user
 router.post(
-  "/addNotes",
+  "/addNote",
   fetchUser,
   [
     body("title", "Enter a valid title.").isLength({ min: 7 }),
