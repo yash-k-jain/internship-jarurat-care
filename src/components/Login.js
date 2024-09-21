@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import NoteContext from "../context/notes/NoteContext";
+import ServiceContext from "../context/services/ServiceContext";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   useEffect(() => {
-    document.title = "NoteKeeper | Login";
+    document.title = "ServiceKeeper | Login";
   }, []);
-  const context = useContext(NoteContext);
+  const context = useContext(ServiceContext);
 
   const navigate = useNavigate();
 

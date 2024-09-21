@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors')
-require("dotenv").config({ path: "./config.env" });
+const dotenv = require("dotenv");
 const PORT = 5000
 
 //Bringing Connecting DB function
 const connectToMongo = require("./db");
+
+dotenv.config();
 
 const app = express();
 //DB connection making
@@ -22,7 +24,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", require("./routes/auth"));
-app.use("/api/notes", require("./routes/notes"));
+app.use("/api/services", require("./routes/service"));
 app.use("/", require("./routes/contact"))
 
 app.listen(port, () => {

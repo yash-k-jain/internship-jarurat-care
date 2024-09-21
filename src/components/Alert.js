@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import NoteContext from "../context/notes/NoteContext";
+import ServiceContext from "../context/services/ServiceContext";
 
 function Alert() {
-  const context = useContext(NoteContext)
+  const context = useContext(ServiceContext)
   const capitalize = (word) => {
     word.toLowerCase();
     return word.charAt(0).toUpperCase() + word.slice(1);

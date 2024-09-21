@@ -1,24 +1,24 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import NoteContext from "../context/notes/NoteContext";
+import ServiceContext from "../context/services/ServiceContext";
 
 export default function Navbar() {
   let location = useLocation();
 
-  const context = useContext(NoteContext);
+  const context = useContext(ServiceContext);
 
   const navigate = useNavigate();
 
-  // useEffect( () => {
-  //   context.userDetails()
-  //   // console.log(context.user)
-  // }, [])
+  useEffect(() => {
+    context.userDetails();
+    // console.log(context.user)
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
-    context.setNotes([])
-    context.setUser({})
+    context.setServices([]);
+    context.setUser({});
     context.showAlert("success", "Successfully Logged Out");
   };
 
@@ -28,7 +28,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            NoteKeeper
+            ServiceKeeper
           </Link>
           <button
             className="navbar-toggler"
@@ -67,11 +67,22 @@ export default function Navbar() {
               <li className="nav-item">
                 <Link
                   className={`nav-link ${
-                    location.pathname === "/notes" ? "active" : ""
+                    location.pathname === "/services" ? "active" : ""
                   }`}
-                  to="/notes"
+                  to="/services"
                 >
-                  Notes
+                  Services
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className={`nav-link ${
+                    location.pathname === "/services/:id" ? "active" : ""
+                  }`}
+                  onClick={(e) => !context.user && e.preventDefault()}
+                  to={`/services/${context.user?._id}`}
+                >
+                  My Services
                 </Link>
               </li>
             </ul>
@@ -100,11 +111,10 @@ export default function Navbar() {
                 >
                   LogOut
                 </button>
-                {/* {!context.user.name === '' && <button disabled
-                  className="btn btn-outline-success"
-                > 
-                {context.user.name}
-                </button>} */}
+                <button disabled className="btn btn-outline-success">
+                  {context.user?.name.charAt(0).toUpperCase() +
+                    context.user?.name.slice(1)}
+                </button>
               </form>
             )}
           </div>

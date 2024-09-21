@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import NoteContext from "../context/notes/NoteContext";
+import ServiceContext from "../context/services/ServiceContext";
 import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   useEffect(() => {
     document.title = "NoteKeeper | Registration"
   }, [])
-  const context = useContext(NoteContext)
+  const context = useContext(ServiceContext)
 
   const navigate = useNavigate();
 

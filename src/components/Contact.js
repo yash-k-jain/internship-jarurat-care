@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import NoteContext from "../context/notes/NoteContext";
+import ServiceContext from "../context/services/ServiceContext";
 import { useNavigate } from "react-router-dom";
 
 function Contact() {
   const navigate = useNavigate()
-  const context = useContext(NoteContext)
+  const context = useContext(ServiceContext)
   const [data, setData] = useState({
     name: "",
     email: "",

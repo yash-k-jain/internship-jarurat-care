@@ -1,41 +1,42 @@
 import React, { useContext, useState } from "react";
-import NoteContext from "../context/notes/NoteContext";
+import ServiceContext from "../context/services/ServiceContext";
 
 function AddForm() {
-  const context = useContext(NoteContext);
+  const context = useContext(ServiceContext);
 
   // state for note added
-  const [note, setNote] = useState({
+  const [service, setService] = useState({
     title: "",
     description: "",
-    tag: "general",
+    price: 0,
   });
 
   // function when input changes
   const onChange = (e) => {
     e.preventDefault();
-    setNote({ ...note, [e.target.name]: e.target.value });
+    setService({ ...service, [e.target.name]: e.target.value });
   };
 
   // handle form when submitted
-  const handleAddNote = (e) => {
+  const handleAddService = (e) => {
     e.preventDefault();
-    context.addNote(note.title, note.description, note.tag);
-    setNote({ title: "", description: "", tag: "" });
+    context.addService(service.title, service.description, service.price);
+    context.userDetails();
+    setService({ title: "", description: "", price: "" });
     context.showAlert('success', 'Note Added Succssfully')
   };
   
   return (
     <div>
-      <h1 className="my-2"> Add A Note </h1>
+      <h1 className="my-2"> Add A Service </h1>
       <form className="my-3">
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
-            Enter Title for you note
+            Enter Title for your Service
           </label>
           <input
             onChange={onChange}
-            value={note.title}
+            value={service.title}
             name="title"
             type="text"
             className="form-control"
@@ -47,11 +48,11 @@ function AddForm() {
         </div>
         <div className="mb-3">
           <label htmlFor="description" className="form-label">
-            Enter Description for your note
+            Enter Description for your Service
           </label>
           <input
             onChange={onChange}
-            value={note.description}
+            value={service.description}
             name="description"
             type="text"
             className="form-control"
@@ -62,24 +63,24 @@ function AddForm() {
         </div>
         <div className="mb-3">
           <label htmlFor="tag" className="form-label">
-            Enter tag for your note
+            Enter Price for your Service
           </label>
           <input
             onChange={onChange}
-            value={note.tag}
-            name="tag"
-            type="text"
+            value={service.price}
+            name="price"
+            type="number"
             className="form-control"
-            id="tag"
+            id="price"
           />
         </div>
         <button
-          onClick={handleAddNote}
+          onClick={handleAddService}
           type="submit"
           className="btn btn-primary"
-          disabled={note.title.length <= 7 || note.description.length <= 7}
+          disabled={service.title.length <= 7 || service.description.length <= 7}
         >
-          Add Note
+          Add Service
         </button>
       </form>
     </div>

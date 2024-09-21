@@ -1,40 +1,40 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import NoteContext from "../context/notes/NoteContext";
+import ServiceContext from "../context/services/ServiceContext";
 
 function EditModal(props) {
-  const context = useContext(NoteContext);
+  const context = useContext(ServiceContext);
 
   // refernce to close modal
   const refClose = useRef(null);
 
   // state for note edited
-  const [note, setNote] = useState({
+  const [service, setService] = useState({
     id: "",
     etitle: "",
     edescription: "",
-    etag: "",
+    eprice: "",
   });
 
   // set note to note selected wonly when note sent as prop changes
   useEffect(() => {
-    setNote({
-      id: props.note._id,
-      etitle: props.note.title,
-      edescription: props.note.description,
-      etag: props.note.tag,
+    setService({
+      id: props.service?._id,
+      etitle: props.service?.title,
+      edescription: props.service?.description,
+      eprice: props.service?.price,
     });
-  }, [props.note]);
+  }, [props.service]);
 
   // handle on change when input changes
   const onChange = (e) => {
     e.preventDefault();
-    setNote({ ...note, [e.target.name]: e.target.value });
+    setService({ ...service, [e.target.name]: e.target.value });
   };
 
   // handle form when submitted
-  const handleEditNote = (e) => {
+  const handleEditService = (e) => {
     refClose.current.click();
-    context.editNote(note.id, note.etitle, note.edescription, note.etag);
+    context.editService(service.id, service.etitle, service.edescription, service.eprice);
     context.showAlert('success', 'Successfully Updated a Note')
   };
   
@@ -61,7 +61,7 @@ function EditModal(props) {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Edit Note
+                Edit Service
               </h5>
               <button
                 type="button"
@@ -76,11 +76,11 @@ function EditModal(props) {
               <form className="my-3">
                 <div className="mb-3">
                   <label htmlFor="etitle" className="form-label">
-                    Enter Title for you note
+                    Enter Title for you Service
                   </label>
                   <input
                     onChange={onChange}
-                    value={note.etitle}
+                    value={service.etitle}
                     name="etitle"
                     type="text"
                     className="form-control"
@@ -92,11 +92,11 @@ function EditModal(props) {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="edescription" className="form-label">
-                    Enter Description for your note
+                    Enter Description for your Service
                   </label>
                   <input
                     onChange={onChange}
-                    value={note.edescription}
+                    value={service.edescription}
                     name="edescription"
                     type="text"
                     className="form-control"
@@ -107,15 +107,15 @@ function EditModal(props) {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="etag" className="form-label">
-                    Enter tag for your note
+                    Enter Price for your Service
                   </label>
                   <input
                     onChange={onChange}
-                    value={note.etag}
-                    name="etag"
-                    type="text"
+                    value={service.eprice}
+                    name="eprice"
+                    type="number"
                     className="form-control"
-                    id="etag"
+                    id="eprice"
                   />
                 </div>
               </form>
@@ -130,12 +130,12 @@ function EditModal(props) {
                 Close
               </button>
               <button
-                disabled={note.etitle.length <= 7 || note.edescription.length <= 7}
-                onClick={handleEditNote}
+                disabled={service.etitle?.length <= 7 || service.edescription?.length <= 7}
+                onClick={handleEditService}
                 type="button"
                 className="btn btn-primary"
               >
-                Update Note
+                Update Service
               </button>
             </div>
           </div>
